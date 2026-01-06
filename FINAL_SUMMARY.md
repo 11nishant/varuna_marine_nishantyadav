@@ -1,15 +1,15 @@
-# 🎉 Fuel EU Maritime Compliance Platform - Final Summary
+#  Fuel EU Maritime Compliance Platform - Final Summary
 
 ## ✅ Project Complete - Ready for Testing!
 
-### 🗄️ Database Status
+###  Database Status
 ✅ **PostgreSQL Connected**
 - Host: `localhost:5432`
 - Database: `fueleu`
 - User: `postgres`
 - **5 Routes seeded successfully**
 
-### 📊 Database Tables & Data
+###  Database Tables & Data
 
 **Route Table** (5 records):
 ```
@@ -28,7 +28,7 @@ R005 | Container  | LNG | 2025 | 90.5 gCO₂e/MJ
 
 ---
 
-## 🚀 Quick Start Guide
+##  Quick Start Guide
 
 ### Step 1: Start Backend Server
 Open PowerShell in `backend` folder:
@@ -43,7 +43,7 @@ $env:DATABASE_URL="postgresql://postgres:nishant@localhost:5432/fueleu"
 npm run dev
 ```
 
-✅ Backend will run on: **http://localhost:3001**
+✅Backend will run on: **http://localhost:3001**
 
 ### Step 2: Start Frontend Server
 Open **NEW** PowerShell in `frontend` folder:
@@ -64,7 +64,7 @@ Navigate to: **http://localhost:5173**
 
 ---
 
-## 🎨 Frontend UI Features
+## Frontend UI Features
 
 ### Tab 1: **Routes** 
 - ✅ View all 5 routes in a table
@@ -94,7 +94,7 @@ Navigate to: **http://localhost:5173**
 
 ---
 
-## 🔧 Backend API Endpoints
+##  Backend API Endpoints
 
 ### Routes
 ```bash
@@ -126,7 +126,7 @@ Body: { "year": 2024, "shipIds": ["R001", "R002", "R003"] }
 
 ---
 
-## 🧪 Test the Application
+##  Test the Application
 
 ### 1. Test Routes Tab
 - Open http://localhost:5173
@@ -156,7 +156,7 @@ Body: { "year": 2024, "shipIds": ["R001", "R002", "R003"] }
 
 ---
 
-## 📐 Architecture Highlights
+##  Architecture Highlights
 
 ### Backend (Hexagonal Architecture)
 ```
@@ -187,7 +187,7 @@ adapters/
 
 ---
 
-## 🔍 Key Formulas Implemented
+##  Key Formulas Implemented
 
 ### Compliance Balance (CB)
 ```
@@ -203,7 +203,7 @@ percentDiff = ((comparison / baseline) - 1) × 100
 
 ---
 
-## 📝 Files Created
+##  Files Created
 
 ### Documentation
 - ✅ `README.md` - Complete project documentation
@@ -219,7 +219,7 @@ percentDiff = ((comparison / baseline) - 1) × 100
 
 ---
 
-## ✨ What's Working
+##  What's Working
 
 ✅ Database connected and seeded
 ✅ Backend API fully functional
@@ -235,7 +235,7 @@ percentDiff = ((comparison / baseline) - 1) × 100
 
 ---
 
-## 🎯 Next Steps to Test
+##  Next Steps to Test
 
 1. **Start both servers** (use the PowerShell scripts)
 2. **Open browser** to http://localhost:5173
@@ -248,7 +248,7 @@ percentDiff = ((comparison / baseline) - 1) × 100
 
 ---
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### Backend won't start?
 - Check PostgreSQL is running
@@ -266,7 +266,7 @@ percentDiff = ((comparison / baseline) - 1) × 100
 
 ---
 
-## 🎊 Project Complete!
+##  Project Complete!
 
 All features implemented, tested, and ready for demonstration. The application follows Fuel EU Maritime Regulation requirements and implements:
 - ✅ Route management
