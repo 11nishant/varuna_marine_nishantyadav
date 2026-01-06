@@ -1,4 +1,4 @@
-// Quick test to verify Prisma can connect
+     // Quick test to verify Prisma can connect
 require('dotenv').config();
 
 console.log('DATABASE_URL:', process.env.DATABASE_URL ? 'SET' : 'NOT SET');
