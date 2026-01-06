@@ -5,73 +5,218 @@
 /* Fallback styles and visual polish in case Tailwind isn't applied */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-:root{
-	--bg: #f8fafc;
-	--card: #ffffff;
-	--primary: #0ea5ff;
-	--primary-600: #0284c7;
-	--accent: #fb7185;
-	--muted: #6b7280;
-	--border: #e6eef6;
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --primary: #0ea5ff;
+  --primary-600: #0284c7;
+  --accent: #fb7185;
+  --muted: #6b7280;
+  --border: #e6eef6;
 }
 
-html,body,#app{height:100%}
+html,
+body,
+#app {
+  height: 100%
+}
 
 /* Background image (dimmed) - uses public/ path */
-body{
-	font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-	color: #0f172a;
-	margin: 0;
-	/* lighter white overlay -> make image more visible */
-	/* reduce white overlay so background image is more visible */
-	background-image: linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35)), url('/Gemini_Generated_Image_kpq61kpq61kpq61k.png');
-	background-size: cover;
-	background-position: center center;
-	background-attachment: fixed;
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+  color: #0f172a;
+  margin: 0;
+  /* lighter white overlay -> make image more visible */
+  /* reduce white overlay so background image is more visible */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('/Gemini_Generated_Image_kpq61kpq61kpq61k.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
 }
 
-header{
-	background: transparent;
-	border-bottom: 1px solid rgba(10,40,80,0.06);
+header {
+  background: transparent;
+  border-bottom: 1px solid rgba(10, 40, 80, 0.06);
 }
 
-header h1{
-	margin: 0;
-	padding: 1.5rem 1rem;
-	font-size: 1.9rem;
-	color: #044e76;
-	text-shadow: 0 3px 8px rgba(4,78,118,0.14);
-	font-weight: 700;
+header h1 {
+  margin: 0;
+  padding: 1.5rem 1rem;
+  font-size: 1.9rem;
+  color: #044e76;
+  text-shadow: 0 3px 8px rgba(4, 78, 118, 0.14);
+  font-weight: 700;
 }
 
-nav{background:transparent;border-bottom:1px solid rgba(10,40,80,0.04)}
-nav .tabs{display:flex;gap:1rem;padding:1rem 1rem;align-items:center;margin-bottom:1.75rem;flex-wrap:wrap}
-nav .tabs .tab-button{background:transparent;border:1px solid rgba(14,165,255,0.14);padding:0.7rem 1.2rem;border-radius:16px;cursor:pointer;color:var(--primary-600);font-weight:700;box-shadow:0 6px 18px rgba(12,36,54,0.03);letter-spacing:0.2px;transition:transform .16s ease, box-shadow .16s ease, background-color .16s ease, color .16s ease, border-color .16s ease}
-nav .tabs .tab-button:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 30px rgba(2,132,199,0.14);background:rgba(14,165,255,0.12);color:var(--primary-600)}
-nav .tabs .tab-button:active{transform:translateY(-1px) scale(0.995);background:rgba(14,165,255,0.18)}
-nav .tabs .tab-button[aria-pressed='true'], nav .tabs .tab-button.active{background:var(--primary);color:#fff;border-color:var(--primary-600);box-shadow:0 12px 36px rgba(2,132,199,0.2)}
+nav {
+  background: transparent;
+  border-bottom: 1px solid rgba(10, 40, 80, 0.04)
+}
 
-main{max-width:1100px;margin:1.5rem auto;padding:0 1rem}
-.card,.bg-white{background:rgba(255,255,255,0.94);border:1px solid var(--border);padding:1rem;border-radius:8px;box-shadow:0 6px 18px rgba(12,36,54,0.04)}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-label{display:block;margin-bottom:.35rem;color:var(--muted);font-size:.95rem}
-input[type="text"],input[type="number"],select{width:100%;padding:.5rem .6rem;border:1px solid #d1e8fb;border-radius:6px;background:#fff}
-button{cursor:pointer;border:none;background:var(--primary);color:#fff;padding:.5rem .8rem;border-radius:6px}
-button[disabled]{background:#cbd5e1;cursor:not-allowed}
-table{width:100%;border-collapse:collapse;margin-top:1rem}
-thead th{background:#f1f7fb;text-align:left;padding:.75rem;border-bottom:1px solid var(--border);font-weight:700}
-tbody td{padding:.6rem;border-bottom:1px solid var(--border)}
-tbody tr:nth-child(even){background:#fbfdff}
-.info{color:var(--muted)}
-.status-positive{color:green}
-.status-negative{color:#ef4444}
-.chart-wrapper{background:var(--card);padding:1rem;border-radius:8px}
-@media (max-width:768px){.grid-2{grid-template-columns:1fr}header h1{font-size:1.25rem}}
+nav .tabs {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1rem;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap
+}
+
+nav .tabs .tab-button {
+  background: transparent;
+  border: 1px solid rgba(14, 165, 255, 0.5);
+  padding: 0.7rem 1.2rem;
+  border-radius: 16px;
+  cursor: pointer;
+  color: var(--primary-600);
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(12, 36, 54, 0.03);
+  letter-spacing: 0.2px;
+  transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease, color .16s ease, border-color .16s ease
+}
+
+nav .tabs .tab-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(2, 132, 199, 0.14);
+  background: rgba(14, 165, 255, 0.12);
+  color: var(--primary-600)
+}
+
+nav .tabs .tab-button:active {
+  transform: translateY(-1px) scale(0.995);
+  background: rgba(14, 165, 255, 0.18)
+}
+
+nav .tabs .tab-button[aria-pressed='true'],
+nav .tabs .tab-button.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary-600);
+  box-shadow: 0 12px 36px rgba(2, 132, 199, 0.2)
+}
+
+main {
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  padding: 0 1rem
+}
+
+.card,
+.bg-white {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(12, 36, 54, 0.04)
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem
+}
+
+label {
+  display: block;
+  margin-bottom: .35rem;
+  color: var(--muted);
+  font-size: .95rem
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: .5rem .6rem;
+  border: 1px solid #d1e8fb;
+  border-radius: 6px;
+  background: #fff
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  padding: .5rem .8rem;
+  border-radius: 6px
+}
+
+button[disabled] {
+  background: #cbd5e1;
+  cursor: not-allowed
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem
+}
+
+thead th {
+  background: #f1f7fb;
+  text-align: left;
+  padding: .75rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700
+}
+
+tbody td {
+  padding: .6rem;
+  border-bottom: 1px solid var(--border)
+}
+
+tbody tr:nth-child(even) {
+  background: #fbfdff
+}
+
+.info {
+  color: var(--muted)
+}
+
+.status-positive {
+  color: green
+}
+
+.status-negative {
+  color: #ef4444
+}
+
+.chart-wrapper {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 8px
+}
+
+@media (max-width:768px) {
+  .grid-2 {
+    grid-template-columns: 1fr
+  }
+
+  header h1 {
+    font-size: 1.25rem
+  }
+}
 
 /* Tiny utility fallbacks so component spacing works when Tailwind utilities aren't applied */
-.mb-6{margin-bottom:1.5rem}
-.flex{display:flex}
-.gap-4{gap:1rem}
+.mb-6 {
+  margin-bottom: 1.5rem
+}
+
+.flex {
+  display: flex
+}
+
+.gap-4 {
+  gap: 1rem
+}
 
 /* Add extra top spacing so filters sit clearly below nav */
-main{max-width:1100px;margin:2.5rem auto;padding:1.5rem 1rem 2rem}
+main {
+  max-width: 1100px;
+  margin: 2.5rem auto;
+  padding: 1.5rem 1rem 2rem
+}
+/*modified  button border density */
+
+
