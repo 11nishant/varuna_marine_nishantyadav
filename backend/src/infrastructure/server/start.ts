@@ -1,4 +1,4 @@
-// This file ensures dotenv is loaded before anything else
+ // This file ensures dotenv is loaded before anything else
 import dotenv from 'dotenv';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
