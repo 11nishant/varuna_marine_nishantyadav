@@ -1,151 +1,223 @@
- # AI Agent Workflow Log
+# AI Agent Workflow Log
 
 ## Agents Used
-- **Cursor Agent** (Primary): Used throughout the development process for code generation, refactoring, and architectural decisions
-- **GitHub Copilot** (Implicit): Used for inline code completions and suggestions
+
+* **Cursor Agent (Primary):**
+  Used throughout the project for generating boilerplate code, setting up hexagonal architecture, implementing use cases, and refactoring large sections of the codebase.
+
+* **GitHub Copilot:**
+  Used mainly for inline suggestions while writing TypeScript, React components, Prisma models, and small refactors. It helped speed up repetitive coding tasks.
+
+* **ChatGPT:**
+  Used for debugging errors, understanding Prisma and Vite issues, validating formulas, and clarifying architectural or conceptual doubts during development.
+
+---
 
 ## Prompts & Outputs
 
 ### Example 1: Initial Project Setup
-**Prompt:** "Create a Node.js backend with TypeScript, Express, and Prisma for PostgreSQL following hexagonal architecture"
 
-**Generated Output:**
-- Created directory structure: `src/core/domain`, `src/core/application`, `src/core/ports`, `src/adapters/inbound/http`, `src/adapters/outbound/postgres`
-- Initialized Prisma with PostgreSQL datasource
-- Set up TypeScript configuration with proper compilation settings
+**Prompt:**
 
-**Validation:** Verified directory structure matches hexagonal architecture principles. Confirmed Prisma schema follows assignment requirements.
+> “Create a Node.js backend with TypeScript, Express, and Prisma for PostgreSQL following hexagonal architecture”
+
+**Output Produced:**
+
+* Generated a clean folder structure separating `core`, `adapters`, and `infrastructure`
+* Set up Prisma with PostgreSQL
+* Created a TypeScript configuration suitable for backend development
+
+**Validation:**
+I manually checked that the folder structure followed hexagonal architecture principles and that no framework-specific code leaked into the core domain. Prisma setup was aligned with the assignment requirements.
+
+---
 
 ### Example 2: Domain Model Creation
-**Prompt:** "Create domain entities for Route, ComplianceBalance, BankEntry, and Pool following the assignment specifications"
 
-**Generated Output:**
-```typescript
+**Prompt:**
+
+> “Create domain entities for Route, ComplianceBalance, BankEntry, and Pool following the assignment specifications”
+
+**Generated Snippet:**
+
+```ts
 export class Route {
   constructor(
     public readonly id: string,
     public readonly routeId: string,
-    // ... other properties
+    // other properties
   ) {}
 }
 ```
 
-**Refinement:** Agent correctly created immutable domain entities with readonly properties, maintaining domain purity.
+**Refinement:**
+The agent correctly generated immutable domain entities using `readonly` fields. I reviewed naming and ensured the models remained framework-agnostic.
 
-### Example 3: Use Case Implementation
-**Prompt:** "Implement CalculateComplianceBalanceUseCase with formula: CB = (Target - Actual) × Energy in scope / 1000"
+---
 
-**Generated Output:**
-```typescript
+### Example 3: Compliance Balance Calculation
+
+**Prompt:**
+
+> “Implement CalculateComplianceBalanceUseCase with formula: CB = (Target - Actual) × Energy in scope / 1000”
+
+**Generated Logic:**
+
+```ts
 const TARGET_INTENSITY = 89.3368;
 const ENERGY_PER_TONNE = 41000;
 const energyInScope = route.fuelConsumption * ENERGY_PER_TONNE;
 const cbGco2Eq = (TARGET_INTENSITY - route.ghgIntensity) * energyInScope / 1000;
 ```
 
-**Validation:** Verified formula matches assignment specifications. Constants match Fuel EU Maritime requirements.
+**Validation:**
+I verified the formula against the assignment brief and FuelEU references. Constants and units were checked manually to ensure correctness.
+
+---
 
 ### Example 4: Prisma Schema Relations
-**Prompt:** "Create Prisma schema with proper relations between ShipCompliance, BankEntry, Pool, and PoolMember"
 
-**Generated Output:**
-- Initial schema had incorrect relation references
-- Agent attempted to reference Pool by composite key [id, year] which didn't exist
-- Corrected to reference Pool by id only, and ShipCompliance by [shipId, year]
+**Prompt:**
 
-**Correction:** Fixed relation definitions after Prisma validation errors. Ensured all foreign keys reference unique constraints correctly.
+> “Create Prisma schema with proper relations between ShipCompliance, BankEntry, Pool, and PoolMember”
+
+**Initial Output Issues:**
+
+* Incorrect relation references in `PoolMember`
+* Attempted to reference `Pool` using a composite key that didn’t exist
+
+**Corrections Made:**
+
+* Updated relations to reference `Pool` by `id`
+* Used composite unique key `[shipId, year]` for `ShipCompliance`
+* Fixed foreign keys based on Prisma validation errors
+
+---
 
 ### Example 5: React Component Generation
-**Prompt:** "Create a React component for Routes tab with filtering by vesselType, fuelType, and year"
+
+**Prompt:**
+
+> “Create a React component for Routes tab with filtering by vesselType, fuelType, and year”
 
 **Generated Output:**
-- Generated complete RoutesTab component with state management
-- Implemented filter dropdowns with unique values extraction
-- Added table rendering with proper TailwindCSS styling
 
-**Refinement:** Enhanced with error handling and loading states. Added "Set Baseline" button functionality.
+* Complete `RoutesTab` component
+* Filter dropdowns with derived unique values
+* Table rendering with Tailwind styling
+
+**Refinement:**
+I added loading states, error handling, and wired the “Set Baseline” button to the backend API.
+
+---
 
 ### Example 6: API Client Implementation
-**Prompt:** "Create a TypeScript API client for all backend endpoints"
+
+**Prompt:**
+
+> “Create a TypeScript API client for all backend endpoints”
 
 **Generated Output:**
-- Generated ApiClient class with all CRUD methods
-- Properly typed all request/response interfaces
-- Implemented error handling with try-catch blocks
 
-**Validation:** Verified all endpoints match backend implementation. Confirmed TypeScript types are consistent.
+* Centralized API client
+* Typed request/response interfaces
+* Basic error handling logic
+
+**Validation:**
+I cross-checked all routes against backend controllers and ensured types matched exactly.
+
+---
 
 ## Validation / Corrections
 
 ### Schema Validation Issues
-1. **Problem:** Prisma schema validation failed due to incorrect relation references
-   - **Error:** `PoolMember` tried to reference `Pool` by `[id, year]` but Pool only has `id` as unique
-   - **Fix:** Changed to reference Pool by `id` only, added `year` field to PoolMember for ShipCompliance relation
 
-2. **Problem:** BankEntry relation to ShipCompliance
-   - **Error:** Initial attempt to use single field reference
-   - **Fix:** Used composite unique key `[shipId, year]` matching ShipCompliance's unique constraint
+1. **PoolMember → Pool relation**
+
+   * Issue: Referenced non-existent composite key
+   * Fix: Changed reference to `poolId` only
+
+2. **BankEntry → ShipCompliance relation**
+
+   * Issue: Single-field relation caused constraint issues
+   * Fix: Used composite key `[shipId, year]`
+
+---
 
 ### Formula Verification
-- Verified Compliance Balance formula: `(Target - Actual) × Energy / 1000`
-- Confirmed Target Intensity: 89.3368 gCO₂e/MJ (2% below 91.16)
-- Validated Energy conversion: 41,000 MJ/t
 
-### Frontend-Backend Integration
-- Verified API endpoints match between frontend API client and backend routes
-- Confirmed CORS configuration allows frontend to access backend
-- Validated request/response types are consistent
+* Compliance Balance: `(Target − Actual) × Energy / 1000`
+* Target intensity: `89.3368 gCO₂e/MJ`
+* Energy conversion: `41,000 MJ/t`
+
+All calculations were verified manually with sample values.
+
+---
+
+### Frontend–Backend Integration
+
+* API paths verified against Express routes
+* CORS tested locally
+* Type mismatches resolved using TypeScript compiler feedback
+
+---
 
 ## Observations
 
-### Where Agent Saved Time
-1. **Boilerplate Generation:** Quickly generated repository implementations, use cases, and controllers following established patterns
-2. **Type Safety:** Automatically inferred and generated TypeScript types for API responses
-3. **Architecture Consistency:** Maintained hexagonal architecture patterns across all layers
-4. **Component Structure:** Generated React components with proper hooks and state management
+### Where AI Saved Time
 
-### Where Agent Failed or Hallucinated
-1. **Prisma Schema Relations:** Initially created incorrect relation references that required manual correction
-2. **PowerShell Commands:** Attempted to use Unix-style commands (`&&`, `mkdir -p`) that don't work in PowerShell
-3. **Package Versions:** Some generated package.json entries needed version verification
+1. Rapid generation of boilerplate repositories, controllers, and use cases
+2. Consistent TypeScript typing across frontend and backend
+3. Maintaining architectural consistency across many files
+4. Speeding up React component scaffolding
 
-### How Tools Were Combined Effectively
-1. **Iterative Refinement:** Used Cursor Agent to generate initial code, then refined based on linter errors and runtime issues
-2. **Pattern Recognition:** Agent recognized architectural patterns and applied them consistently across similar components
-3. **Error-Driven Development:** Used Prisma validation errors to iteratively improve schema design
-4. **Type Safety:** Leveraged TypeScript compiler errors to catch integration issues early
+---
+
+### Where AI Needed Correction
+
+1. Prisma relation definitions required manual fixes
+2. Shell commands needed PowerShell-compatible alternatives
+3. Some package versions required verification
+4. UI spacing and visual polish required human judgment
+
+---
+
+### How Tools Were Used Together
+
+* **Cursor Agent:** Large-scale generation and refactoring
+* **GitHub Copilot:** Inline suggestions and repetitive code
+* **ChatGPT:** Debugging errors, clarifying concepts, validating formulas
+
+This combination worked well when paired with regular manual review.
+
+---
 
 ## Best Practices Followed
 
-1. **Hexagonal Architecture:**
-   - Separated core domain from infrastructure
-   - Used ports (interfaces) to define contracts
-   - Implemented adapters for external dependencies (Prisma, Express, React)
+* Strict hexagonal architecture
+* Domain isolation from frameworks
+* Typed API contracts
+* Clear separation of concerns
+* Dependency inversion via ports
+* Defensive error handling
 
-2. **Type Safety:**
-   - Strict TypeScript configuration
-   - Proper interface definitions for all API contracts
-   - Domain entities with readonly properties
-
-3. **Separation of Concerns:**
-   - Use cases contain business logic only
-   - Repositories handle data access
-   - Controllers handle HTTP concerns
-
-4. **Error Handling:**
-   - Proper error propagation from use cases to controllers
-   - User-friendly error messages in frontend
-   - Validation at multiple layers
-
-5. **Code Organization:**
-   - Clear directory structure following hexagonal architecture
-   - Consistent naming conventions
-   - Proper dependency injection patterns
+---
 
 ## Challenges Overcome
 
-1. **Prisma 7 Changes:** Adapted to new Prisma 7 configuration format (prisma.config.ts vs schema.prisma)
-2. **PowerShell Compatibility:** Adjusted commands for Windows PowerShell environment
-3. **Type Definitions:** Ensured all React and Node.js types were properly installed
-4. **CORS Configuration:** Properly configured Express CORS middleware for frontend-backend communication
+1. Prisma 7 configuration changes/ faced errors due to version6 and version7 of prisma
+2. PowerShell vs Unix command differences
+3. Tailwind + PostCSS configuration issues
+4. Ensuring consistent data flow between frontend and backend
+
+---
+
+## Final Takeaway
+
+AI tools significantly accelerated development, but **human review was essential**, especially for:
+
+* Business rules
+* Database schema design
+* UI quality
+* Integration testing
 
