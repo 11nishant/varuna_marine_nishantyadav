@@ -224,4 +224,7 @@ ISC
 ## Author
 
 Full-Stack Developer Assignment - Fuel EU Maritime Compliance Platform
+<img width="1890" height="897" alt="proof" src="https://github.com/user-attachments/assets/0c41908c-f8f8-4bc1-8140-8e6132f85e63" />
+
+
 
