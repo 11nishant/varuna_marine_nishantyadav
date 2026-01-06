@@ -158,6 +158,20 @@ cd frontend
 npm test
 ```
 
+## Testing Status
+
+Automated unit and integration tests were planned as part of the assignment.
+Due to constraints, the current implementation focuses on correct domain logic,
+API behavior, and frontend-backend integration.
+
+All formulas, banking, and pooling logic were manually validated using:
+- API calls (Postman / frontend)
+- Database verification via pgAdmin
+- Console logging and edge-case testing
+
+Test scaffolding can be added easily using Jest/Vitest and Supertest.
+
+
 ## Key Formulas
 
 ### Compliance Balance (CB)
