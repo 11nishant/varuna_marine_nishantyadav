@@ -4,7 +4,7 @@ A full-stack application for managing Fuel EU Maritime compliance, including rou
 
 ## Overview
 
-This project implements a compliance dashboard for Fuel EU Maritime Regulation (EU) 2023/1805, featuring:
+ This project implements a compliance dashboard for Fuel EU Maritime Regulation (EU) 2023/1805, featuring:
 
 - **Routes Management:** View and manage shipping routes with GHG intensity tracking
 - **Route Comparison:** Compare routes against baseline with compliance checking
