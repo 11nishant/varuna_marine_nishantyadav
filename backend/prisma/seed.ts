@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-// Load environment variables before PrismaClient is instantiated
+   // Load environment variables before PrismaClient is instantiated
 require('dotenv').config();
 
 const prisma = new PrismaClient();
