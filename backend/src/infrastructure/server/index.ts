@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 
-// Load environment variables first
+ // Load environment variables first
 dotenv.config();
 
 import app from './app';
